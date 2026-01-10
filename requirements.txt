@@ -1,0 +1,22 @@
+# FastAPI Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Database
+sqlite3  # Built-in, no need to install
+
+# Pydantic for data validation
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Template Engine (if templates directory exists)
+jinja2==3.1.2
+
+# CORS Middleware
+fastapi-middleware==0.1.0
+
+# Development tools (optional but useful)
+python-multipart==0.0.6
+
+# Note: SQLite3 comes built-in with Python
+# Note: typing module is built-in for Python 3.9+
