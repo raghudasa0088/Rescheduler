@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Access Control — Rescheduler</title>
+  <link rel="stylesheet" href="./css/access.css">
+  <script>
+  window.API_BASE = "http://127.0.0.1:8000";
+</script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <div>
+          <h1>Access Control</h1>
+          <div class="muted">Manage which accounts can access the rescheduler (credentials table)</div>
+        </div>
+        <div class="top-actions">
+          <input id="q" class="search" placeholder="Search by email or name" />
+          <select id="filterType">
+            <option value="">All access</option>
+            <option value="SCR">SCR - Scheduler</option>
+            <option value="RSCR">RSCR - Re Scheduler</option>
+            <option value="ACL">ACL - Access Control</option>
+            <option value="DBCL">DBCL - Database Control</option>
+            <option value="SCS">SCS - Scheduler Settings</option>
+            <option value="PLS">PLS - Professor Leaves</option>
+          </select>
+          <button id="addBtn">+ Add user</button>
+          <button id="refreshBtn" class="ghost">Refresh</button>
+        </div>
+      </header>
+
+      <div id="listArea">
+        <table aria-label="credentials table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Access</th>
+              <th>Username</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr><td colspan="4" class="muted" style="text-align:center;">Loading...</td></tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div id="modalBackdrop" class="modal-backdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3 id="modalTitle" style="margin-top:0;margin-bottom:16px;">Add user</h3>
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input id="email" placeholder="user@example.com" />
+      </div>
+      <div class="form-row">
+        <label>Access Privileges</label>
+        <div class="checkbox-group" id="accessCheckboxes">
+          <div class="checkbox-item">
+            <input type="checkbox" id="access_scr" value="SCR">
+            <label for="access_scr">SCR - Scheduler</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="access_rscr" value="RSCR">
+            <label for="access_rscr">RSCR - Re Scheduler</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="access_acl" value="ACL">
+            <label for="access_acl">ACL - Access Control</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="access_dbcl" value="DBCL">
+            <label for="access_dbcl">DBCL - Database Control</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="access_scs" value="SCS">
+            <label for="access_scs">SCS - Scheduler Settings</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="access_pls" value="PLS">
+            <label for="access_pls">PLS - Professor Leaves + View Professor Schedule</label>
+          </div>
+        </div>
+        <div class="note">Select all applicable access privileges for this user.</div>
+      </div>
+      <div class="form-row">
+        <label for="professor_name">Username (optional)</label>
+        <input id="professor_name" placeholder="e.g. Dr. Sharma" />
+      </div>
+      <div class="flex" style="justify-content:flex-end;margin-top:20px">
+        <button id="cancelBtn" class="ghost">Cancel</button>
+        <button id="saveBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/src/frontend/js/access.js"></script>
+</body>
+</html>

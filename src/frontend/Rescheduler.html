@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rescheduling Dashboard (Enhanced)</title>
+    <link rel="stylesheet" href="./css/rescheduler.css">
+</head>
+<body>
+    
+    <div id="drag-clone"></div>
+
+    <header class="header">
+        <h1>Rescheduling Dashboard</h1>
+        
+        <div class="control-group">
+            <label for="batch-select">Batch:</label>
+            <select id="batch-select">
+                <option value="">Select Batch</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="term-select">Term:</label>
+            <select id="term-select" disabled>
+                <option value="">Select Term</option>
+            </select>
+        </div>
+        
+        <div class="control-group"> 
+            <label for="section-select">Section:</label>
+            <select id="section-select" disabled>
+                <option value="">Select Section</option>
+            </select>
+        </div>
+
+        <!-- Inline Filters -->
+        <div class="inline-filters">
+            <label for="professor-filter">Professor:</label>
+            <select id="professor-filter">
+                <option value="all">All Professors</option>
+            </select>
+            
+            <label for="course-filter">Course:</label>
+            <select id="course-filter">
+                <option value="all">All Courses</option>
+            </select>
+            <button id="show-all-btn" class="filter-btn">Show All</button>
+        </div>
+
+        <button id="add-class-btn" class="add-class-btn" disabled>Add Class</button>
+        <button id="edit-course-btn" class="edit-course-btn" disabled>Edit Course-Prof</button>
+        <button id="save-changes-btn" class="save-btn" disabled>Save Changes (0)</button>
+        <button id="undo-btn" class="undo-btn" disabled>Undo</button>
+        <button id="reset-btn" class="reset-btn" disabled>Reset</button>
+        <script>
+            window.API_BASE = "http://127.0.0.1:8000";
+            </script>
+    </header>
+
+    <div class="table-container" id="table-container">
+        <table id="schedule-table">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="message-box"></div>
+
+    <!-- Add Class Modal -->
+    <div id="add-class-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Class</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="add-class-form">
+                <div class="form-group">
+                    <label for="new-course">Course</label>
+                    <select id="new-course" required>
+                        <option value="">Select Course</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="new-professor">Professor</label>
+                    <select id="new-professor" required>
+                        <option value="">Select Professor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="new-date">Date</label>
+                    <input type="date" id="new-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-time">Time Slot</label>
+                    <select id="new-time" required>
+                        <option value="">Select Time Slot</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="new-duration">Duration (minutes)</label>
+                    <input type="number" id="new-duration" value="60" min="30" step="30" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="save-btn">Add Class</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Course-Professor Modal -->
+    <div id="edit-course-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Course-Professor Assignments</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="effective-date">Effective From Date</label>
+                <input type="date" id="effective-date" required>
+                <div class="effective-date-note">
+                    This change will apply to all classes from the selected date onward
+                </div>
+            </div>
+            <div class="course-list" id="course-list">
+                <!-- Course list will be populated here -->
+            </div>
+            <div class="course-details" id="course-details" style="display: none;">
+                <h3>Edit Course: <span id="selected-course-name"></span></h3>
+                <div class="current-assignment">
+                    <strong>Current Professor:</strong>
+                    <span id="current-professor">Not assigned</span>
+                </div>
+                <div class="form-group">
+                    <label for="edit-professor">New Professor</label>
+                    <select id="edit-professor">
+                        <option value="">Select Professor</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="button" id="update-course-btn" class="save-btn">Update Assignment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./js/rescheduler.js"> </script>
+</body>
+</html>

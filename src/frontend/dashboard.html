@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Your Leaves — Rescheduler</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+  <style>
+    .page { max-width: 980px; margin: 28px auto; padding:18px; border-radius:8px; box-shadow: 0 2px 8px rgba(0,0,0,.06); background: #fff; }
+    .controls { display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap; }
+    table tbody td { vertical-align: middle; }
+    .muted { color:#666; font-size:0.95rem; }
+    /* --- Modal styles for date editing --- */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); display: none; justify-content: center;
+      align-items: flex-start; /* Aligns to top, mimicking a popup */
+      z-index: 1000; padding-top: 50px;
+    }
+    .modal-content {
+      background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 90%; max-width: 400px;
+    }
+    .modal-controls { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
+    .modal-controls label { flex-grow: 1; }
+  </style>
+  <script>
+    window.API_BASE = "http://127.0.0.1:8000";
+  </script>
+</head>
+<body>
+  <div class="page">
+    <a href="#" onclick="window.history.back(); return false;" class="secondary">&larr; Back to Portal</a>
+    <h4>Your Leaves — <span id="profName">{{ professor_name }}</span></h4>
+    <div class="controls">
+      <label>Start
+        <input id="start" type="date" />
+      </label>
+      <label>End
+        <input id="end" type="date" />
+      </label>
+      <button id="addBtn">Add</button>
+      <button id="fetchBtn" class="primary">Fetch Leaves</button>
+      <div style="margin-left:auto">
+        <span class="muted">Signed in as</span><br/>
+        <strong id="email">{{ email }}</strong>
+        
+      </div>
+    </div>
+
+    <p class="muted">Select start and end date, then click Add. No reason required.</p>
+
+    <table id="leavesTable" class="striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="leavesBody">
+        </tbody>
+    </table>
+
+    <div id="status" style="margin-top:12px;color:crimson;"></div>
+  </div>
+
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-content">
+      <h5>Edit Leave Dates (ID: <span id="modalLeaveId"></span>)</h5>
+      <div class="modal-controls">
+        <label>New Start Date
+          <input id="modalStart" type="date" />
+        </label>
+        <label>New End Date
+          <input id="modalEnd" type="date" />
+        </label>
+      </div>
+      <div class="modal-controls">
+        <button id="modalSaveBtn" class="primary">Save Changes</button>
+        <button id="modalCancelBtn" class="secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script src="/src/frontend/js/dashboard.js">
+</script>
+</body>
+</html>
