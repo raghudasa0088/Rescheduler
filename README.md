@@ -1,9 +1,6 @@
 # 📅 Faculty Rescheduler & Leave Management System
 
 <div align="center">
-<p align="center">
-  <img src="docs/dragdropclass.png" width="95%">
-</p>
 
 ### Intelligent Academic Scheduling Platform
 
