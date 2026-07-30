@@ -1,148 +1,331 @@
-# Faculty Rescheduler & Leave Management System – IIM Bodh Gaya
+# 📅 Faculty Rescheduler & Leave Management System
 
-A lightweight internal tool used for managing **faculty schedules, rescheduling requests, access control, and leave workflows**.  
-Built with a Python backend (FastAPI) and a fully custom, vibe-coded frontend (HTML/JS/CSS).
+<div align="center">
+<p align="center">
+  <img src="docs/dragdropclass.png" width="95%">
+</p>
 
-Designed for academic departments that need a fast, intuitive way to manage complex scheduling operations.
+### Intelligent Academic Scheduling Platform
+
+A comprehensive scheduling platform developed for **IIM Bodh Gaya** to streamline faculty timetable management, leave handling, access control, and conflict-aware class rescheduling.
 
 ---
 
-## 🚀 Features
+<img src="docs/dragdropclass.png" width="95%">
 
-### ✔ Rescheduler
-- Drag-and-drop rescheduling
+</div>
+
+---
+
+## Overview
+
+Managing academic timetables becomes increasingly difficult when faculty members take leave or course assignments change. Manual rescheduling often results in conflicts, duplicated effort, and inconsistent schedules.
+
+This project provides a centralized scheduling platform that enables administrators to manage timetables visually while allowing faculty members to manage their own leaves through a dedicated portal.
+
+The system combines timetable visualization, drag-and-drop rescheduling, leave management, role-based access control, and course assignment administration into a single workflow.
+
+---
+
+# ✨ Core Features
+
+## 📅 Intelligent Rescheduler
+
+- Drag-and-drop class rescheduling
+- Interactive timetable interface
+- Conflict-aware scheduling
+- Real-time validation
+- Batch, term and section filters
+- Professor filtering
+- Course filtering
 - Add new classes
-- Edit professor–course mapping
-- Real-time slot validation
-- Undo/reset logic
-- Batch/term/section filtering
-- Dynamic schedule rendering
+- Undo and reset functionality
 
-### ✔ Professor Leaves
-- Add/edit/delete leaves
-- Modal-based UI
-- Integrated with commitments
-- Conflict-aware workflows
-
-### ✔ Access Control
-- Manage user roles (ACL, RSCR, VWR)
-- Add/edit/delete credentials
-- Simple UI for admin workflows
+<img src="docs/dragdropclass.png" width="95%">
 
 ---
 
-## 🛠 Tech Stack
+# 👨‍🏫 Course–Professor Assignment Management
 
-**Frontend:**  
-- HTML  
-- CSS  
-- Vanilla JavaScript (`type="module"`)
+Administrators can update course ownership without manually editing schedules.
 
-**Backend:**  
-- Python 3.10+  
-- FastAPI  
-- Uvicorn  
-- SQLite using a **sanitized sample DB**
+Features include:
 
----
+- Effective date support
+- Course selection
+- Professor reassignment
+- Future schedule updates
+- Automatic timetable synchronization
 
-## 📂 Project Structure
-
-```
-project-root/
-    src/
-        api/
-            __init__.py
-            main.py
-            accesscontrolserver.py
-            profleaveserver.py
-            reschedulerserver.py
-        frontend/
-            *.html
-            js/
-            css/
-        db/
-            sample_schedules.db
-    scripts/
-        seed_sample_db.py
-    docs/
-        demo.mp4
-        architecture.png
-    README.md
-    CONTRIBUTION.md
-    SETUP.md
-    API_GUIDE.md
-    LICENSE
-    .gitignore
-    .env.example
-```
+<img src="docs/course-professor-assignment.png" width="95%">
 
 ---
 
-## ▶ Demo Video
+# 🗓 Professor Leave Portal
 
-A short 90–120 second demo is available in:
+Faculty members have a dedicated portal to manage leave requests.
+
+Capabilities include
+
+- View existing leaves
+- Add new leave periods
+- Edit leave entries
+- Delete leave records
+- Leave history
+- Professor-specific dashboard
+
+<img src="docs/leavesportal.png" width="95%">
+
+---
+
+# 🔐 Role-Based Access Control
+
+Different users are granted access only to the modules they require.
+
+Supported permissions include
+
+- Scheduler
+- Rescheduler
+- Access Control
+- Database Control
+- Scheduler Settings
+- Professor Leave Portal
+
+<img src="docs/accesscontrol.png" width="95%">
+
+---
+
+# 👥 User Management
+
+Administrators can create and manage user accounts with granular permission control.
+
+Functions include
+
+- Create users
+- Assign permissions
+- Edit access privileges
+- Delete users
+- Username management
+- Permission filtering
+
+<img src="docs/rolebasedaccess.png" width="95%">
+
+---
+
+# 🚀 Key Features
+
+### Scheduler
+
+- Drag-and-drop timetable editing
+- Dynamic timetable rendering
+- Conflict validation
+- Add classes
+- Undo changes
+- Reset schedules
+- Multi-filter support
+
+### Leave Management
+
+- Faculty leave portal
+- CRUD operations
+- Conflict-aware scheduling
+- Professor-specific access
+
+### Administration
+
+- Role-based permissions
+- User management
+- Access control
+- Course assignment management
+
+---
+
+# 🖥 Tech Stack
+
+## Frontend
+
+- HTML5
+- CSS3
+- Vanilla JavaScript (ES Modules)
+
+## Backend
+
+- Python
+- FastAPI
+- Uvicorn
+
+## Database
+
+- SQLite
+
+---
+
+# 🏗 System Architecture
 
 ```
-/docs/demo.mp4
+Faculty
+      │
+      ▼
+Leave Portal
+      │
+      ▼
+FastAPI Backend
+      │
+      ├──────────────┐
+      ▼              ▼
+SQLite DB      Access Control
+      │
+      ▼
+Rescheduler Engine
+      │
+      ▼
+Interactive Timetable
 ```
 
 ---
 
-## 🧩 Architecture
+# 📂 Project Structure
 
-- Frontend loads static HTML/CSS/JS
-- JS interacts with FastAPI backend via REST
-- Backend writes to SQLite DB
-- Three core backend modules:
-  - `rescheduler`
-  - `access control`
-  - `professor leaves`
-
-Architecture diagram in:
-
-```
-/docs/architecture.png
+```text
+Faculty-Rescheduler
+│
+├── src/
+│   ├── api/
+│   │   ├── main.py
+│   │   ├── accesscontrolserver.py
+│   │   ├── profleaveserver.py
+│   │   └── reschedulerserver.py
+│   │
+│   ├── frontend/
+│   │   ├── rescheduler.html
+│   │   ├── access.html
+│   │   ├── dashboard.html
+│   │   ├── js/
+│   │   └── css/
+│   │
+│   └── db/
+│       └── sample_schedules.db
+│
+├── docs/
+│   ├── dragdropclass.png
+│   ├── course-professor-assignment.png
+│   ├── leavesportal.png
+│   ├── accesscontrol.png
+│   └── rolebasedaccess.png
+│
+├── README.md
+├── CONTRIBUTION.md
+├── API_GUIDE.md
+└── requirements.txt
 ```
 
 ---
 
-## 📝 Quick Start
+# ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/yourusername/faculty-rescheduler.git
+```
+
+Create a virtual environment
 
 ```bash
 python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
+```
+
+Activate the environment
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux/macOS
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+Seed the sample database
+
+```bash
 python scripts/seed_sample_db.py
+```
 
+Run the backend
+
+```bash
 uvicorn src.api.main:app --reload
 ```
 
-Open frontend:
+Open
 
 ```
 src/frontend/rescheduler.html
-src/frontend/access.html
-src/frontend/profleaves.html
 ```
 
 ---
 
-## 👤 Author & Contribution
+# 🎯 Use Cases
 
-This project was built by a team of three, but I independently built:
-
-- Entire **Rescheduler UI & JS logic**
-- Entire **Professor Leaves frontend**
-- Entire **Access Control frontend**
-- Integrated backend endpoints for these modules
-- Debugged and wired the full flow together
-
-Full details in: `CONTRIBUTION.md`.
+- Universities
+- Business Schools
+- Engineering Colleges
+- Academic Administration
+- Faculty Scheduling
+- Semester Planning
+- Leave Management
 
 ---
 
-## 📄 License
+# Future Improvements
 
-MIT License. See `LICENSE`.
+- Authentication system
+- Automatic timetable optimization
+- AI-assisted rescheduling
+- Calendar synchronization
+- Email notifications
+- Audit logs
+- Multi-campus support
+- Analytics dashboard
+
+---
+
+# 👨‍💻 My Contribution
+
+This project was developed as part of a three-member team.
+
+My primary contributions include:
+
+- Complete Rescheduler frontend
+- Drag-and-drop timetable interface
+- Professor Leave Portal
+- Role-Based Access Control UI
+- Course–Professor Assignment interface
+- Backend integration for these modules
+- End-to-end workflow integration and debugging
+
+Detailed contribution information is available in **CONTRIBUTION.md**.
+
+---
+
+# Developed By
+
+**Raghunandan Dasa**
+
+Built to simplify academic scheduling by combining interactive timetable management, leave administration, and role-based access control into a unified scheduling platform for IIM Bodh Gaya.
+
+---
+
+# License
+
+This project is licensed under the MIT License.
